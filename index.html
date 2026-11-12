@@ -1,164 +1,101 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#10243a">
-  <title>World Data AI</title>
-  <style>
-    :root{--bg:#f3f6fb;--surface:#fff;--text:#172536;--muted:#64748b;--primary:#1769aa;--line:#e3eaf2;--navy:#10243a;--shadow:0 8px 26px rgba(20,45,75,.08)}
-    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
-    header{background:linear-gradient(125deg,#10243a,#1769aa);color:white;padding:22px 16px 30px}
-    .wrap{max-width:1100px;margin:auto}.top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:11px}.logo{width:42px;height:42px;border-radius:13px;background:#ffffff20;display:grid;place-items:center;font-size:23px}
-    h1{font-size:21px;margin:0}.tag{font-size:12px;color:#d5e8f8;margin-top:3px}
-    button,select,input{font:inherit}.lang{border:1px solid #ffffff65;background:#ffffff15;color:white;padding:8px 12px;border-radius:10px}
-    .hero{padding-top:30px}.hero h2{font-size:clamp(25px,5vw,38px);margin:0 0 8px}.hero p{margin:0;color:#d5e8f8;max-width:650px;line-height:1.6}
-    main{padding:22px 16px 45px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-2px}
-    .stat,.panel,.country{background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
-    .stat{padding:16px}.stat small{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:23px;margin-top:5px}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:10px;margin:27px 0 13px}.section-head h3{margin:0;font-size:19px}.section-head p{margin:4px 0 0;color:var(--muted);font-size:12px}
-    .tools{display:grid;grid-template-columns:1fr 190px;gap:10px;margin-bottom:15px}.tools input,.tools select{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:white;color:var(--text);outline-color:var(--primary)}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.country{padding:15px;min-width:0}.country-top{display:flex;align-items:center;gap:11px}.flag{font-size:32px;line-height:1}.country h4{font-size:15px;margin:0}.country .ename{font-size:12px;color:var(--muted);margin-top:3px}
-    .details{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.detail{background:#f5f8fc;padding:9px;border-radius:10px}.detail small{display:block;color:var(--muted);font-size:11px}.detail b{font-size:13px}
-    .panel{padding:17px;margin-top:20px}.panel h3{margin:0 0 8px}.panel p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}
-    .status{font-size:12px;color:var(--muted);margin:12px 0}.error{color:#b42318}.empty{text-align:center;padding:30px;color:var(--muted);grid-column:1/-1}
-    footer{text-align:center;color:var(--muted);font-size:12px;padding:20px}
-    @media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:520px){.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:19px}.grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.hero{padding-top:24px}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#123e68">
+<title>World Data AI — Global Country Intelligence</title>
+<style>
+:root{--blue:#123e68;--blue2:#17649a;--ink:#172536;--muted:#667589;--bg:#f2f6fb;--card:#fff;--line:#dce5ef}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+header{background:linear-gradient(130deg,#102f50,#17649a);color:white;padding:28px 18px 34px}
+.wrap{max-width:1100px;margin:auto}.brand{display:flex;align-items:center;gap:12px}.globe{width:54px;height:54px;border-radius:16px;background:#ffffff20;display:grid;place-items:center;font-size:30px}.brand h1{font-size:26px;margin:0}.brand p{margin:2px 0 0;color:#d6e9f8}.hero h2{font-size:clamp(26px,5vw,42px);line-height:1.35;margin:30px 0 8px}.hero>p{font-size:17px;line-height:1.8;color:#d6e9f8;margin:0}
+main{padding:24px 16px 50px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:-2px}.stat,.panel,.country{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:0 5px 18px #183a5810}.stat{padding:18px}.stat span{display:block;color:var(--muted);font-size:14px}.stat strong{display:block;font-size:26px;margin-top:6px;overflow-wrap:anywhere}
+h2.section{font-size:25px;margin:32px 0 5px}.hint{color:var(--muted);margin:0 0 16px}.controls{display:grid;grid-template-columns:1fr 220px;gap:12px}.controls input,.controls select{width:100%;padding:15px 16px;border:2px solid #cbd9e8;border-radius:14px;background:white;color:var(--ink);font-size:16px;outline:none}.controls input:focus,.controls select:focus{border-color:var(--blue2)}
+.status{margin:16px 0;color:var(--muted);font-size:14px}.status.error{color:#a32626}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.country{padding:16px;min-width:0}.countrytop{display:flex;align-items:center;gap:12px;margin-bottom:12px}.flag{width:58px;height:42px;object-fit:cover;border:1px solid #e7edf4;border-radius:7px;background:#f4f6f8}.country h3{font-size:18px;margin:0;overflow-wrap:anywhere}.en{font-size:13px;color:var(--muted);margin-top:2px}.details{display:grid;grid-template-columns:1fr 1fr;gap:10px}.detail{background:#f5f8fc;border-radius:10px;padding:9px}.detail small{display:block;color:var(--muted);font-size:12px}.detail b{font-size:14px;overflow-wrap:anywhere}.empty{grid-column:1/-1;text-align:center;padding:36px 12px;color:var(--muted)}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 12px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:21px}}
+@media(max-width:440px){.grid{grid-template-columns:1fr}.brand h1{font-size:23px}.hero h2{font-size:27px}.stat span{font-size:12px}.stat strong{font-size:18px}}
+</style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <div class="top">
-      <div class="brand"><div class="logo">🌐</div><div><h1>World Data AI</h1><div class="tag">Global Country Intelligence</div></div></div>
-      <button class="lang" id="langBtn" type="button">English</button>
-    </div>
-    <div class="hero">
-      <h2 id="heroTitle">বিশ্বের দেশগুলোকে জানুন, তুলনা করুন</h2>
-      <p id="heroText">এক জায়গায় বিভিন্ন দেশের পরিচিতি, জনসংখ্যা, অঞ্চল ও মুদ্রার প্রাথমিক তথ্য। পরবর্তী ধাপে অর্থনীতি, প্রযুক্তি ও জীবনমানের ডাটা যুক্ত হবে।</p>
-    </div>
-  </div>
-</header>
+<header><div class="wrap">
+  <div class="brand"><div class="globe">🌐</div><div><h1>World Data AI</h1><p>Global Country Intelligence</p></div></div>
+  <div class="hero"><h2>বিশ্বের দেশগুলোকে জানুন</h2><p>এক জায়গায় বিভিন্ন দেশের পরিচিতি, জনসংখ্যা, আয়তন, রাজধানী ও মুদ্রার প্রাথমিক তথ্য।</p></div>
+</div></header>
 <main class="wrap">
   <section class="stats">
-    <div class="stat"><small id="stat1Label">দেশের ডাটাবেজ</small><strong id="countryCount">লোড হচ্ছে…</strong></div>
-    <div class="stat"><small id="stat2Label">বিশ্ব অঞ্চল</small><strong>৬</strong></div>
-    <div class="stat"><small id="stat3Label">ডাটা উৎস</small><strong>REST Countries</strong></div>
+    <div class="stat"><span>দেশের ডাটাবেজ</span><strong id="total">লোড হচ্ছে…</strong></div>
+    <div class="stat"><span>বিশ্ব অঞ্চল</span><strong id="regions">—</strong></div>
+    <div class="stat"><span>তথ্য উৎস</span><strong style="font-size:19px">REST Countries</strong></div>
   </section>
-
-  <div class="section-head">
-    <div><h3 id="listTitle">দেশের তালিকা</h3><p id="listSub">দেশের নাম লিখে খুঁজুন অথবা অঞ্চল নির্বাচন করুন</p></div>
+  <h2 class="section">দেশের তালিকা</h2>
+  <p class="hint">দেশের নাম বাংলা বা ইংরেজিতে লিখে খুঁজুন অথবা অঞ্চল নির্বাচন করুন।</p>
+  <div class="controls">
+    <input id="search" type="search" placeholder="যেমন: বাংলাদেশ / Bangladesh" aria-label="দেশ খুঁজুন">
+    <select id="region" aria-label="অঞ্চল নির্বাচন"><option value="">সব অঞ্চল</option></select>
   </div>
-  <div class="tools">
-    <input id="search" type="search" placeholder="দেশের নাম লিখুন…">
-    <select id="region">
-      <option value="">সব অঞ্চল</option><option>Africa</option><option>Americas</option><option>Asia</option><option>Europe</option><option>Oceania</option>
-    </select>
-  </div>
-  <div class="status" id="status">সার্ভার থেকে দেশের তথ্য আনা হচ্ছে…</div>
-  <section class="grid" id="countryGrid" aria-live="polite"></section>
-
-  <section class="panel">
-    <h3 id="aboutTitle">এই সংস্করণে কী আছে?</h3>
-    <p id="aboutText">এটি World Data AI-এর প্রথম ধাপ: মোবাইল-উপযোগী ড্যাশবোর্ড, বাংলা/ইংরেজি ভাষা পরিবর্তন, দেশ সার্চ, অঞ্চল অনুযায়ী ফিল্টার এবং লাইভ Country API থেকে দেশের প্রাথমিক তথ্য। এটি এখনো পূর্ণ AI বিশ্লেষণ ব্যবস্থা নয়।</p>
-  </section>
-  <footer>World Data AI · Data source: REST Countries API · তথ্যের প্রাপ্যতা API-এর ওপর নির্ভরশীল</footer>
+  <div class="status" id="status" role="status">দেশের তথ্য আনা হচ্ছে…</div>
+  <section class="grid" id="countries"></section>
 </main>
+<footer>তথ্য উৎস: REST Countries API · তথ্যের প্রাপ্যতা ও হালনাগাদের সময় উৎসের ওপর নির্ভরশীল।<br>World Data AI — প্রাথমিক সংস্করণ</footer>
 <script>
-const $ = id => document.getElementById(id);
-let countries = [];
-let lang = "bn";
-const text = {
-  bn:{
-    heroTitle:"বিশ্বের দেশগুলোকে জানুন, তুলনা করুন",
-    heroText:"এক জায়গায় বিভিন্ন দেশের পরিচিতি, জনসংখ্যা, অঞ্চল ও মুদ্রার প্রাথমিক তথ্য। পরবর্তী ধাপে অর্থনীতি, প্রযুক্তি ও জীবনমানের ডাটা যুক্ত হবে।",
-    stat1:"দেশের ডাটাবেজ",stat2:"বিশ্ব অঞ্চল",stat3:"ডাটা উৎস",list:"দেশের তালিকা",
-    sub:"দেশের নাম লিখে খুঁজুন অথবা অঞ্চল নির্বাচন করুন",search:"দেশের নাম লিখুন…",
-    all:"সব অঞ্চল",population:"জনসংখ্যা",capital:"রাজধানী",region:"অঞ্চল",currency:"মুদ্রা",
-    loading:"সার্ভার থেকে দেশের তথ্য আনা হচ্ছে…",loaded:"টি দেশের তথ্য পাওয়া গেছে।",
-    failed:"তথ্য আনা যায়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন।",
-    empty:"কোনো দেশ পাওয়া যায়নি।",aboutTitle:"এই সংস্করণে কী আছে?",
-    aboutText:"এটি World Data AI-এর প্রথম ধাপ: মোবাইল-উপযোগী ড্যাশবোর্ড, বাংলা/ইংরেজি ভাষা পরিবর্তন, দেশ সার্চ, অঞ্চল অনুযায়ী ফিল্টার এবং লাইভ Country API থেকে দেশের প্রাথমিক তথ্য। এটি এখনো পূর্ণ AI বিশ্লেষণ ব্যবস্থা নয়."
-  },
-  en:{
-    heroTitle:"Discover and compare countries around the world",
-    heroText:"Explore basic country profiles, population, regions and currencies in one place. Economy, technology and quality-of-life data will be added in later stages.",
-    stat1:"Country database",stat2:"World regions",stat3:"Data source",list:"Country directory",
-    sub:"Search by country name or filter by region",search:"Type a country name…",
-    all:"All regions",population:"Population",capital:"Capital",region:"Region",currency:"Currency",
-    loading:"Loading country data from the server…",loaded:"countries loaded.",
-    failed:"Could not load data. Check your internet connection and try again.",
-    empty:"No countries found.",aboutTitle:"What is included in this version?",
-    aboutText:"This is the first step of World Data AI: a mobile-friendly dashboard, Bangla/English language switch, country search, region filter and basic country information from a live Country API. This is not yet a full AI analytics system."
-  }
-};
-function formatNumber(n){
-  return new Intl.NumberFormat(lang==="bn"?"bn-BD":"en-US").format(n||0);
-}
+const API='https://restcountries.com/v3.1/all?fields=name,translations,cca2,flags,capital,region,population,area,currencies,languages';
+let countries=[];
+const bn=n=>n?.translations?.ben?.common || n?.common || 'নাম পাওয়া যায়নি';
+const en=n=>n?.common || '';
+const number=n=>Number.isFinite(n)?new Intl.NumberFormat('bn-BD').format(n):'তথ্য নেই';
 function render(){
-  const q=$("search").value.trim().toLowerCase();
-  const r=$("region").value;
-  const filtered=countries.filter(c=>{
-    const names=[c.name?.common,c.name?.official,...(c.altSpellings||[])].join(" ").toLowerCase();
-    return names.includes(q) && (!r || c.region===r);
-  });
-  $("countryCount").textContent=formatNumber(countries.length);
-  $("status").textContent=lang==="bn"?`${formatNumber(filtered.length)} / ${formatNumber(countries.length)} টি দেশ দেখানো হচ্ছে`:`Showing ${filtered.length} of ${countries.length} countries`;
-  $("countryGrid").innerHTML="";
-  if(!filtered.length){$("countryGrid").innerHTML=`<div class="empty">${text[lang].empty}</div>`;return;}
-  const fragment=document.createDocumentFragment();
-  filtered.slice(0,120).forEach(c=>{
-    const name=lang==="bn"?(c.translations?.ben?.common||c.name.common):c.name.common;
-    const capital=(c.capital||["—"])[0];
-    const currency=c.currencies?Object.values(c.currencies).map(x=>x.name).join(", "):"—";
-    const card=document.createElement("article");card.className="country";
-    card.innerHTML=`
-      <div class="country-top"><div class="flag">${c.flag||"🌍"}</div><div><h4></h4><div class="ename"></div></div></div>
-      <div class="details">
-        <div class="detail"><small>${text[lang].population}</small><b>${formatNumber(c.population)}</b></div>
-        <div class="detail"><small>${text[lang].capital}</small><b></b></div>
-        <div class="detail"><small>${text[lang].region}</small><b></b></div>
-        <div class="detail"><small>${text[lang].currency}</small><b></b></div>
-      </div>`;
-    card.querySelector("h4").textContent=name;
-    card.querySelector(".ename").textContent=c.name.common;
-    const vals=card.querySelectorAll(".detail b");
-    vals[1].textContent=capital;vals[2].textContent=c.region||"—";vals[3].textContent=currency;
-    fragment.appendChild(card);
-  });
-  $("countryGrid").appendChild(fragment);
+ const q=document.getElementById('search').value.trim().toLocaleLowerCase();
+ const r=document.getElementById('region').value;
+ const list=countries.filter(c=>{
+   const names=[bn(c.name),en(c.name),c.cca2||''].join(' ').toLocaleLowerCase();
+   return names.includes(q) && (!r || c.region===r);
+ }).sort((a,b)=>bn(a.name).localeCompare(bn(b.name),'bn'));
+ document.getElementById('status').textContent=`${number(list.length)} / ${number(countries.length)} টি দেশ দেখানো হচ্ছে`;
+ const root=document.getElementById('countries');root.innerHTML='';
+ if(!list.length){root.innerHTML='<div class="empty">কোনো দেশ পাওয়া যায়নি। বানান পরীক্ষা করুন অথবা অঞ্চল পরিবর্তন করুন।</div>';return}
+ const frag=document.createDocumentFragment();
+ list.forEach(c=>{
+  const currency=Object.values(c.currencies||{}).map(x=>x.name+(x.symbol?' ('+x.symbol+')':'')).join(', ')||'তথ্য নেই';
+  const langs=Object.values(c.languages||{}).join(', ')||'তথ্য নেই';
+  const el=document.createElement('article');el.className='country';
+  const img=document.createElement('img');img.className='flag';img.alt='জাতীয় পতাকা';img.loading='lazy';img.src=c.flags?.svg||c.flags?.png||''; 
+  const top=document.createElement('div');top.className='countrytop';top.append(img);
+  const names=document.createElement('div');const h=document.createElement('h3');h.textContent=bn(c.name);const e=document.createElement('div');e.className='en';e.textContent=en(c.name);names.append(h,e);top.append(names);el.append(top);
+  const d=document.createElement('div');d.className='details';
+  const values=[['রাজধানী',(c.capital||[]).join(', ')||'তথ্য নেই'],['অঞ্চল',c.region||'তথ্য নেই'],['জনসংখ্যা',number(c.population)],['আয়তন',Number.isFinite(c.area)?number(c.area)+' বর্গকিমি':'তথ্য নেই'],['মুদ্রা',currency],['ভাষা',langs]];
+  values.forEach(([label,value])=>{const box=document.createElement('div');box.className='detail';const s=document.createElement('small');s.textContent=label;const b=document.createElement('b');b.textContent=value;box.append(s,b);d.append(box)});
+  el.append(d);frag.append(el);
+ });
+ root.append(frag);
 }
-function setLanguage(){
-  const t=text[lang];
-  $("heroTitle").textContent=t.heroTitle;$("heroText").textContent=t.heroText;
-  $("stat1Label").textContent=t.stat1;$("stat2Label").textContent=t.stat2;$("stat3Label").textContent=t.stat3;
-  $("listTitle").textContent=t.list;$("listSub").textContent=t.sub;$("search").placeholder=t.search;
-  $("region").options[0].textContent=t.all;
-  $("aboutTitle").textContent=t.aboutTitle;$("aboutText").textContent=t.aboutText;
-  $("langBtn").textContent=lang==="bn"?"English":"বাংলা";
-  document.documentElement.lang=lang==="bn"?"bn":"en";
+async function load(){
+ const status=document.getElementById('status');status.className='status';status.textContent='REST Countries থেকে তথ্য আনা হচ্ছে…';
+ try{
+  const response=await fetch(API,{cache:'no-store'});
+  if(!response.ok)throw new Error('সার্ভার উত্তর দিয়েছে: '+response.status);
+  const data=await response.json();
+  if(!Array.isArray(data)||!data.length)throw new Error('কোনো দেশের তথ্য পাওয়া যায়নি');
+  countries=data;
+  const regions=[...new Set(data.map(c=>c.region).filter(Boolean))].sort();
+  const select=document.getElementById('region');
+  regions.forEach(region=>{const o=document.createElement('option');o.value=region;o.textContent=region;select.append(o)});
+  document.getElementById('total').textContent=number(data.length);
+  document.getElementById('regions').textContent=number(regions.length);
   render();
+ }catch(error){
+  document.getElementById('total').textContent='০';
+  document.getElementById('regions').textContent='—';
+  status.className='status error';
+  status.textContent='দেশের তথ্য লোড হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করে আবার চেষ্টা করুন। কারণ: '+error.message;
+  document.getElementById('countries').innerHTML='<div class="empty"><button id="retry" style="padding:12px 20px;border:0;border-radius:10px;background:#17649a;color:white;font-size:16px">আবার চেষ্টা করুন</button></div>';
+  document.getElementById('retry').addEventListener('click',load);
+ }
 }
-$("langBtn").addEventListener("click",()=>{lang=lang==="bn"?"en":"bn";setLanguage();});
-$("search").addEventListener("input",render);
-$("region").addEventListener("change",render);
-async function loadCountries(){
-  try{
-    const response=await fetch("https://restcountries.com/v3.1/all?fields=name,translations,capital,region,population,currencies,flags,flag,altSpellings");
-    if(!response.ok)throw new Error("API error");
-    countries=await response.json();
-    countries.sort((a,b)=>a.name.common.localeCompare(b.name.common));
-    $("status").textContent=`${formatNumber(countries.length)} ${text[lang].loaded}`;
-    render();
-  }catch(error){
-    $("status").textContent=text[lang].failed;$("status").classList.add("error");
-    $("countryGrid").innerHTML='<div class="empty">REST Countries API unavailable</div>';
-  }
-}
-setLanguage();
-loadCountries();
+document.getElementById('search').addEventListener('input',render);
+document.getElementById('region').addEventListener('change',render);
+load();
 </script>
 </body>
 </html>
